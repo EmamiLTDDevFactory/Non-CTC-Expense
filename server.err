@@ -1,0 +1,347 @@
+(node:2208) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Error in POST /api/verify-otp:
+  message: Request failed with status code 501
+  status: 501
+  data: {
+  "error": {
+    "code": "/IWBEP/CM_MGW_RT/021",
+    "message": {
+      "lang": "en",
+      "value": "Method 'LOGINSET_GET_ENTITYSET' not implemented in data provider class."
+    },
+    "innererror": {
+      "application": {
+        "component_id": "",
+        "service_namespace": "/SAP/",
+        "service_id": "ZFI_EXPCLAIM_SRV",
+        "service_version": "0001"
+      },
+      "transactionid": "86E79F2A03010080E006A45984535A15",
+      "timestamp": "20260714051923.1687480",
+      "Error_Resolution": {
+        "SAP_Transaction": "For backend administrators: run transaction /IWFND/ERROR_LOG on SAP Gateway hub system and search for entries with the timestamp above for more details",
+        "SAP_Note": "See SAP Note 1797736 for error analysis (https://service.sap.com/sap/support/notes/1797736)"
+      },
+      "errordetails": [
+        {
+          "code": "/IWBEP/CX_MGW_NOT_IMPL_EXC",
+          "message": "Method 'LOGINSET_GET_ENTITYSET' not implemented in data provider class",
+          "propertyref": "",
+          "severity": "error",
+          "target": ""
+        }
+      ]
+    }
+  }
+}
+  headers: {
+  "content-length": "853",
+  "connection": "close",
+  "content-type": "application/json; charset=utf-8",
+  "date": "Tue, 14 Jul 2026 05:19:23 GMT",
+  "access-control-allow-credentials": "true",
+  "access-control-allow-origin": "https://emdcindpwebapp2-atd7bmfdcmbzf0hh.centralindia-01.azurewebsites.net",
+  "etag": "W/\"355-kuGTHX7Jo1jLarxTsBzbS3/AdIM\"",
+  "vary": "Origin",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-ms-middleware-request-id": "17a4455e-6245-4a16-b220-0d284f66a271",
+  "request-context": "appId=cid-v1:",
+  "x-powered-by": "Express"
+}
+  request url: https://emdcindpwebapp1-bag2gfhjd9d4gkh6.centralindia-01.azurewebsites.net/api/NGD/ZFI_EXPCLAIM_SRV/LoginSet
+  request method: get
+  request headers: {
+  "Accept": "application/json",
+  "X-Requested-With": "XMLHttpRequest",
+  "DataServiceVersion": "2.0",
+  "X-CSRF-Token": "Fetch",
+  "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImFGa21LVkZjLTRXVjZzWENCdk5aa1hJNTA1WSIsImtpZCI6ImFGa21LVkZjLTRXVjZzWENCdk5aa1hJNTA1WSJ9.eyJhdWQiOiJhcGk6Ly8yMjdmYTM0MC00ZjIyLTQ1MjItYjgxYy1kMzg1MzUzMGEyODYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9kMDE2YWViZC0xZjk2LTRkZDEtYTIyYi1lZWIwMjAxZmI2MWUvIiwiaWF0IjoxNzg0MDA2MDYyLCJuYmYiOjE3ODQwMDYwNjIsImV4cCI6MTc4NDAwOTk2MiwiYWlvIjoiazJGZ1lQQlJiaEhhL3VHVnRXYitwSzE4b3BiTjNSZG1ubUQ5OG5TTlFjb3lsdWRzUXJvQSIsImFwcGlkIjoiMjI3ZmEzNDAtNGYyMi00NTIyLWI4MWMtZDM4NTM1MzBhMjg2IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvZDAxNmFlYmQtMWY5Ni00ZGQxLWEyMmItZWViMDIwMWZiNjFlLyIsIm9pZCI6IjllNzQxYTZkLTNlMWUtNDhjYi04MWU3LWM1MGZlYWUxMzg0OSIsInJoIjoiMS5BVDRBdmE0VzBKWWYwVTJpSy02d0lCLTJIa0NqZnlJaVR5SkZ1QnpUaFRVd29vWUFBQUEtQUEuIiwic3ViIjoiOWU3NDFhNmQtM2UxZS00OGNiLTgxZTctYzUwZmVhZTEzODQ5IiwidGlkIjoiZDAxNmFlYmQtMWY5Ni00ZGQxLWEyMmItZWViMDIwMWZiNjFlIiwidXRpIjoiZVNGcHJqazhmVWFJN1BKbVZ4Y09BQSIsInZlciI6IjEuMCIsInhtc19mdGQiOiI2bnhWemM4N0s5TXpESFRHR1ZZUUgyTDFqT2RWVnRLWHloVWY4OEwtNmxVQmEyOXlaV0Z6YjNWMGFDMWtjMjF6In0.XZBkXQN5a3W3KtDf_Hir1nU2xY4OB9QXLorr-HcsphTO9KCLnL7PBq7SSZVSmQB3cl-gRd0ux6imZo68kCrVPzVbZ9rerZpSJ-5zVWix3HQFtVk1yx8zZAGdxMIdt0P4sNLR0PrtmpdqiHIggupFmd6inMiDKU_OK1oyAzimlB57LNbNjIXfHwDal5vhgHGTAeFZbPs33qtHipWKGFq6eXYodOILsRshFSXywCOYVMX_7Am8ZD4x1J0FpI1xwu8vjXNohbv82L6pGXUI9j9D0VF3sA5RFWkaCBqI2PK4K4DKoBdXS77FS2mEah_ZqOZnLJKQagr6sTPSWuh_EJVJZw",
+  "User-Agent": "axios/1.18.1",
+  "Accept-Encoding": "gzip, compress, deflate, br"
+}
+AxiosError: Request failed with status code 501
+    at settle (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:2216:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:4062:11)
+    at IncomingMessage.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at Axios.request (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:5517:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async C:\Users\Lenovo\Desktop\ZexpenseClaim\server.js:364:25
+Error in POST /api/verify-otp:
+  message: Request failed with status code 501
+  status: 501
+  data: {
+  "error": {
+    "code": "/IWBEP/CM_MGW_RT/021",
+    "message": {
+      "lang": "en",
+      "value": "Method 'LOGINSET_GET_ENTITYSET' not implemented in data provider class."
+    },
+    "innererror": {
+      "application": {
+        "component_id": "",
+        "service_namespace": "/SAP/",
+        "service_id": "ZFI_EXPCLAIM_SRV",
+        "service_version": "0001"
+      },
+      "transactionid": "86E79F2A03010080E006A45984535A19",
+      "timestamp": "20260714052238.8012780",
+      "Error_Resolution": {
+        "SAP_Transaction": "For backend administrators: run transaction /IWFND/ERROR_LOG on SAP Gateway hub system and search for entries with the timestamp above for more details",
+        "SAP_Note": "See SAP Note 1797736 for error analysis (https://service.sap.com/sap/support/notes/1797736)"
+      },
+      "errordetails": [
+        {
+          "code": "/IWBEP/CX_MGW_NOT_IMPL_EXC",
+          "message": "Method 'LOGINSET_GET_ENTITYSET' not implemented in data provider class",
+          "propertyref": "",
+          "severity": "error",
+          "target": ""
+        }
+      ]
+    }
+  }
+}
+  headers: {
+  "content-length": "853",
+  "connection": "close",
+  "content-type": "application/json; charset=utf-8",
+  "date": "Tue, 14 Jul 2026 05:22:38 GMT",
+  "access-control-allow-credentials": "true",
+  "access-control-allow-origin": "https://emdcindpwebapp2-atd7bmfdcmbzf0hh.centralindia-01.azurewebsites.net",
+  "etag": "W/\"355-qUIDgz+cBepNTkFWuKyjDWYlEsQ\"",
+  "vary": "Origin",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-ms-middleware-request-id": "4947e2c2-1fbb-4ac8-b49f-1d9ceffc85b4",
+  "request-context": "appId=cid-v1:",
+  "x-powered-by": "Express"
+}
+  request url: https://emdcindpwebapp1-bag2gfhjd9d4gkh6.centralindia-01.azurewebsites.net/api/NGD/ZFI_EXPCLAIM_SRV/LoginSet
+  request method: get
+  request headers: {
+  "Accept": "application/json",
+  "X-Requested-With": "XMLHttpRequest",
+  "DataServiceVersion": "2.0",
+  "X-CSRF-Token": "Fetch",
+  "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImFGa21LVkZjLTRXVjZzWENCdk5aa1hJNTA1WSIsImtpZCI6ImFGa21LVkZjLTRXVjZzWENCdk5aa1hJNTA1WSJ9.eyJhdWQiOiJhcGk6Ly8yMjdmYTM0MC00ZjIyLTQ1MjItYjgxYy1kMzg1MzUzMGEyODYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9kMDE2YWViZC0xZjk2LTRkZDEtYTIyYi1lZWIwMjAxZmI2MWUvIiwiaWF0IjoxNzg0MDA2MDYyLCJuYmYiOjE3ODQwMDYwNjIsImV4cCI6MTc4NDAwOTk2MiwiYWlvIjoiazJGZ1lQQlJiaEhhL3VHVnRXYitwSzE4b3BiTjNSZG1ubUQ5OG5TTlFjb3lsdWRzUXJvQSIsImFwcGlkIjoiMjI3ZmEzNDAtNGYyMi00NTIyLWI4MWMtZDM4NTM1MzBhMjg2IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvZDAxNmFlYmQtMWY5Ni00ZGQxLWEyMmItZWViMDIwMWZiNjFlLyIsIm9pZCI6IjllNzQxYTZkLTNlMWUtNDhjYi04MWU3LWM1MGZlYWUxMzg0OSIsInJoIjoiMS5BVDRBdmE0VzBKWWYwVTJpSy02d0lCLTJIa0NqZnlJaVR5SkZ1QnpUaFRVd29vWUFBQUEtQUEuIiwic3ViIjoiOWU3NDFhNmQtM2UxZS00OGNiLTgxZTctYzUwZmVhZTEzODQ5IiwidGlkIjoiZDAxNmFlYmQtMWY5Ni00ZGQxLWEyMmItZWViMDIwMWZiNjFlIiwidXRpIjoiZVNGcHJqazhmVWFJN1BKbVZ4Y09BQSIsInZlciI6IjEuMCIsInhtc19mdGQiOiI2bnhWemM4N0s5TXpESFRHR1ZZUUgyTDFqT2RWVnRLWHloVWY4OEwtNmxVQmEyOXlaV0Z6YjNWMGFDMWtjMjF6In0.XZBkXQN5a3W3KtDf_Hir1nU2xY4OB9QXLorr-HcsphTO9KCLnL7PBq7SSZVSmQB3cl-gRd0ux6imZo68kCrVPzVbZ9rerZpSJ-5zVWix3HQFtVk1yx8zZAGdxMIdt0P4sNLR0PrtmpdqiHIggupFmd6inMiDKU_OK1oyAzimlB57LNbNjIXfHwDal5vhgHGTAeFZbPs33qtHipWKGFq6eXYodOILsRshFSXywCOYVMX_7Am8ZD4x1J0FpI1xwu8vjXNohbv82L6pGXUI9j9D0VF3sA5RFWkaCBqI2PK4K4DKoBdXS77FS2mEah_ZqOZnLJKQagr6sTPSWuh_EJVJZw",
+  "User-Agent": "axios/1.18.1",
+  "Accept-Encoding": "gzip, compress, deflate, br"
+}
+AxiosError: Request failed with status code 501
+    at settle (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:2216:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:4062:11)
+    at IncomingMessage.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at Axios.request (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:5517:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async C:\Users\Lenovo\Desktop\ZexpenseClaim\server.js:364:25
+Error in POST /api/verify-otp:
+  message: Request failed with status code 501
+  status: 501
+  data: {
+  "error": {
+    "code": "/IWBEP/CM_MGW_RT/021",
+    "message": {
+      "lang": "en",
+      "value": "Method 'LOGINSET_GET_ENTITYSET' not implemented in data provider class."
+    },
+    "innererror": {
+      "application": {
+        "component_id": "",
+        "service_namespace": "/SAP/",
+        "service_id": "ZFI_EXPCLAIM_SRV",
+        "service_version": "0001"
+      },
+      "transactionid": "86E79F2A03010060E006A459845A166E",
+      "timestamp": "20260714052836.0665800",
+      "Error_Resolution": {
+        "SAP_Transaction": "For backend administrators: run transaction /IWFND/ERROR_LOG on SAP Gateway hub system and search for entries with the timestamp above for more details",
+        "SAP_Note": "See SAP Note 1797736 for error analysis (https://service.sap.com/sap/support/notes/1797736)"
+      },
+      "errordetails": [
+        {
+          "code": "/IWBEP/CX_MGW_NOT_IMPL_EXC",
+          "message": "Method 'LOGINSET_GET_ENTITYSET' not implemented in data provider class",
+          "propertyref": "",
+          "severity": "error",
+          "target": ""
+        }
+      ]
+    }
+  }
+}
+  headers: {
+  "content-length": "853",
+  "connection": "close",
+  "content-type": "application/json; charset=utf-8",
+  "date": "Tue, 14 Jul 2026 05:28:36 GMT",
+  "access-control-allow-credentials": "true",
+  "access-control-allow-origin": "https://emdcindpwebapp2-atd7bmfdcmbzf0hh.centralindia-01.azurewebsites.net",
+  "etag": "W/\"355-w8cPy6ILlzFBZn0EHhIaMUXx1W8\"",
+  "vary": "Origin",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-ms-middleware-request-id": "c308fc8d-ca0b-423d-8d3c-11b4d2c44908",
+  "request-context": "appId=cid-v1:",
+  "x-powered-by": "Express"
+}
+  request url: https://emdcindpwebapp1-bag2gfhjd9d4gkh6.centralindia-01.azurewebsites.net/api/NGD/ZFI_EXPCLAIM_SRV/LoginSet
+  request method: get
+  request headers: {
+  "Accept": "application/json",
+  "X-Requested-With": "XMLHttpRequest",
+  "DataServiceVersion": "2.0",
+  "X-CSRF-Token": "Fetch",
+  "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImFGa21LVkZjLTRXVjZzWENCdk5aa1hJNTA1WSIsImtpZCI6ImFGa21LVkZjLTRXVjZzWENCdk5aa1hJNTA1WSJ9.eyJhdWQiOiJhcGk6Ly8yMjdmYTM0MC00ZjIyLTQ1MjItYjgxYy1kMzg1MzUzMGEyODYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9kMDE2YWViZC0xZjk2LTRkZDEtYTIyYi1lZWIwMjAxZmI2MWUvIiwiaWF0IjoxNzg0MDA2MDYyLCJuYmYiOjE3ODQwMDYwNjIsImV4cCI6MTc4NDAwOTk2MiwiYWlvIjoiazJGZ1lQQlJiaEhhL3VHVnRXYitwSzE4b3BiTjNSZG1ubUQ5OG5TTlFjb3lsdWRzUXJvQSIsImFwcGlkIjoiMjI3ZmEzNDAtNGYyMi00NTIyLWI4MWMtZDM4NTM1MzBhMjg2IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvZDAxNmFlYmQtMWY5Ni00ZGQxLWEyMmItZWViMDIwMWZiNjFlLyIsIm9pZCI6IjllNzQxYTZkLTNlMWUtNDhjYi04MWU3LWM1MGZlYWUxMzg0OSIsInJoIjoiMS5BVDRBdmE0VzBKWWYwVTJpSy02d0lCLTJIa0NqZnlJaVR5SkZ1QnpUaFRVd29vWUFBQUEtQUEuIiwic3ViIjoiOWU3NDFhNmQtM2UxZS00OGNiLTgxZTctYzUwZmVhZTEzODQ5IiwidGlkIjoiZDAxNmFlYmQtMWY5Ni00ZGQxLWEyMmItZWViMDIwMWZiNjFlIiwidXRpIjoiZVNGcHJqazhmVWFJN1BKbVZ4Y09BQSIsInZlciI6IjEuMCIsInhtc19mdGQiOiI2bnhWemM4N0s5TXpESFRHR1ZZUUgyTDFqT2RWVnRLWHloVWY4OEwtNmxVQmEyOXlaV0Z6YjNWMGFDMWtjMjF6In0.XZBkXQN5a3W3KtDf_Hir1nU2xY4OB9QXLorr-HcsphTO9KCLnL7PBq7SSZVSmQB3cl-gRd0ux6imZo68kCrVPzVbZ9rerZpSJ-5zVWix3HQFtVk1yx8zZAGdxMIdt0P4sNLR0PrtmpdqiHIggupFmd6inMiDKU_OK1oyAzimlB57LNbNjIXfHwDal5vhgHGTAeFZbPs33qtHipWKGFq6eXYodOILsRshFSXywCOYVMX_7Am8ZD4x1J0FpI1xwu8vjXNohbv82L6pGXUI9j9D0VF3sA5RFWkaCBqI2PK4K4DKoBdXS77FS2mEah_ZqOZnLJKQagr6sTPSWuh_EJVJZw",
+  "User-Agent": "axios/1.18.1",
+  "Accept-Encoding": "gzip, compress, deflate, br"
+}
+AxiosError: Request failed with status code 501
+    at settle (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:2216:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:4062:11)
+    at IncomingMessage.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at Axios.request (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:5517:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async C:\Users\Lenovo\Desktop\ZexpenseClaim\server.js:364:25
+Error in POST /api/verify-otp:
+  message: Request failed with status code 501
+  status: 501
+  data: {
+  "error": {
+    "code": "/IWBEP/CM_MGW_RT/021",
+    "message": {
+      "lang": "en",
+      "value": "Method 'LOGINSET_GET_ENTITYSET' not implemented in data provider class."
+    },
+    "innererror": {
+      "application": {
+        "component_id": "",
+        "service_namespace": "/SAP/",
+        "service_id": "ZFI_EXPCLAIM_SRV",
+        "service_version": "0001"
+      },
+      "transactionid": "86E79F2A03010090E006A4598452A8D8",
+      "timestamp": "20260714053016.1794220",
+      "Error_Resolution": {
+        "SAP_Transaction": "For backend administrators: run transaction /IWFND/ERROR_LOG on SAP Gateway hub system and search for entries with the timestamp above for more details",
+        "SAP_Note": "See SAP Note 1797736 for error analysis (https://service.sap.com/sap/support/notes/1797736)"
+      },
+      "errordetails": [
+        {
+          "code": "/IWBEP/CX_MGW_NOT_IMPL_EXC",
+          "message": "Method 'LOGINSET_GET_ENTITYSET' not implemented in data provider class",
+          "propertyref": "",
+          "severity": "error",
+          "target": ""
+        }
+      ]
+    }
+  }
+}
+  headers: {
+  "content-length": "853",
+  "connection": "close",
+  "content-type": "application/json; charset=utf-8",
+  "date": "Tue, 14 Jul 2026 05:30:16 GMT",
+  "access-control-allow-credentials": "true",
+  "access-control-allow-origin": "https://emdcindpwebapp2-atd7bmfdcmbzf0hh.centralindia-01.azurewebsites.net",
+  "etag": "W/\"355-olR7qiu7R1SuKJR6WwPKKME7ziw\"",
+  "vary": "Origin",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-ms-middleware-request-id": "287e7a94-150e-4ae6-899f-a7b1a8132862",
+  "request-context": "appId=cid-v1:",
+  "x-powered-by": "Express"
+}
+  request url: https://emdcindpwebapp1-bag2gfhjd9d4gkh6.centralindia-01.azurewebsites.net/api/NGD/ZFI_EXPCLAIM_SRV/LoginSet
+  request method: get
+  request headers: {
+  "Accept": "application/json",
+  "X-Requested-With": "XMLHttpRequest",
+  "DataServiceVersion": "2.0",
+  "X-CSRF-Token": "Fetch",
+  "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImFGa21LVkZjLTRXVjZzWENCdk5aa1hJNTA1WSIsImtpZCI6ImFGa21LVkZjLTRXVjZzWENCdk5aa1hJNTA1WSJ9.eyJhdWQiOiJhcGk6Ly8yMjdmYTM0MC00ZjIyLTQ1MjItYjgxYy1kMzg1MzUzMGEyODYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9kMDE2YWViZC0xZjk2LTRkZDEtYTIyYi1lZWIwMjAxZmI2MWUvIiwiaWF0IjoxNzg0MDA2MDYyLCJuYmYiOjE3ODQwMDYwNjIsImV4cCI6MTc4NDAwOTk2MiwiYWlvIjoiazJGZ1lQQlJiaEhhL3VHVnRXYitwSzE4b3BiTjNSZG1ubUQ5OG5TTlFjb3lsdWRzUXJvQSIsImFwcGlkIjoiMjI3ZmEzNDAtNGYyMi00NTIyLWI4MWMtZDM4NTM1MzBhMjg2IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvZDAxNmFlYmQtMWY5Ni00ZGQxLWEyMmItZWViMDIwMWZiNjFlLyIsIm9pZCI6IjllNzQxYTZkLTNlMWUtNDhjYi04MWU3LWM1MGZlYWUxMzg0OSIsInJoIjoiMS5BVDRBdmE0VzBKWWYwVTJpSy02d0lCLTJIa0NqZnlJaVR5SkZ1QnpUaFRVd29vWUFBQUEtQUEuIiwic3ViIjoiOWU3NDFhNmQtM2UxZS00OGNiLTgxZTctYzUwZmVhZTEzODQ5IiwidGlkIjoiZDAxNmFlYmQtMWY5Ni00ZGQxLWEyMmItZWViMDIwMWZiNjFlIiwidXRpIjoiZVNGcHJqazhmVWFJN1BKbVZ4Y09BQSIsInZlciI6IjEuMCIsInhtc19mdGQiOiI2bnhWemM4N0s5TXpESFRHR1ZZUUgyTDFqT2RWVnRLWHloVWY4OEwtNmxVQmEyOXlaV0Z6YjNWMGFDMWtjMjF6In0.XZBkXQN5a3W3KtDf_Hir1nU2xY4OB9QXLorr-HcsphTO9KCLnL7PBq7SSZVSmQB3cl-gRd0ux6imZo68kCrVPzVbZ9rerZpSJ-5zVWix3HQFtVk1yx8zZAGdxMIdt0P4sNLR0PrtmpdqiHIggupFmd6inMiDKU_OK1oyAzimlB57LNbNjIXfHwDal5vhgHGTAeFZbPs33qtHipWKGFq6eXYodOILsRshFSXywCOYVMX_7Am8ZD4x1J0FpI1xwu8vjXNohbv82L6pGXUI9j9D0VF3sA5RFWkaCBqI2PK4K4DKoBdXS77FS2mEah_ZqOZnLJKQagr6sTPSWuh_EJVJZw",
+  "User-Agent": "axios/1.18.1",
+  "Accept-Encoding": "gzip, compress, deflate, br"
+}
+AxiosError: Request failed with status code 501
+    at settle (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:2216:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:4062:11)
+    at IncomingMessage.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at Axios.request (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:5517:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async C:\Users\Lenovo\Desktop\ZexpenseClaim\server.js:364:25
+Error in POST /api/verify-otp:
+  message: Request failed with status code 501
+  status: 501
+  data: {
+  "error": {
+    "code": "/IWBEP/CM_MGW_RT/021",
+    "message": {
+      "lang": "en",
+      "value": "Method 'LOGINSET_GET_ENTITYSET' not implemented in data provider class."
+    },
+    "innererror": {
+      "application": {
+        "component_id": "",
+        "service_namespace": "/SAP/",
+        "service_id": "ZFI_EXPCLAIM_SRV",
+        "service_version": "0001"
+      },
+      "transactionid": "86E79F2A03010000E006A4598455CAEE",
+      "timestamp": "20260714053431.7917530",
+      "Error_Resolution": {
+        "SAP_Transaction": "For backend administrators: run transaction /IWFND/ERROR_LOG on SAP Gateway hub system and search for entries with the timestamp above for more details",
+        "SAP_Note": "See SAP Note 1797736 for error analysis (https://service.sap.com/sap/support/notes/1797736)"
+      },
+      "errordetails": [
+        {
+          "code": "/IWBEP/CX_MGW_NOT_IMPL_EXC",
+          "message": "Method 'LOGINSET_GET_ENTITYSET' not implemented in data provider class",
+          "propertyref": "",
+          "severity": "error",
+          "target": ""
+        }
+      ]
+    }
+  }
+}
+  headers: {
+  "content-length": "853",
+  "connection": "close",
+  "content-type": "application/json; charset=utf-8",
+  "date": "Tue, 14 Jul 2026 05:34:31 GMT",
+  "access-control-allow-credentials": "true",
+  "access-control-allow-origin": "https://emdcindpwebapp2-atd7bmfdcmbzf0hh.centralindia-01.azurewebsites.net",
+  "etag": "W/\"355-cCYwLyPu0+9C9Esb86qRG5px/DA\"",
+  "vary": "Origin",
+  "strict-transport-security": "max-age=31536000; includeSubDomains",
+  "x-ms-middleware-request-id": "f31a06df-b867-494a-9ea2-9fa7fe9bd1be",
+  "request-context": "appId=cid-v1:",
+  "x-powered-by": "Express"
+}
+  request url: https://emdcindpwebapp1-bag2gfhjd9d4gkh6.centralindia-01.azurewebsites.net/api/NGD/ZFI_EXPCLAIM_SRV/LoginSet
+  request method: get
+  request headers: {
+  "Accept": "application/json",
+  "X-Requested-With": "XMLHttpRequest",
+  "DataServiceVersion": "2.0",
+  "X-CSRF-Token": "Fetch",
+  "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImFGa21LVkZjLTRXVjZzWENCdk5aa1hJNTA1WSIsImtpZCI6ImFGa21LVkZjLTRXVjZzWENCdk5aa1hJNTA1WSJ9.eyJhdWQiOiJhcGk6Ly8yMjdmYTM0MC00ZjIyLTQ1MjItYjgxYy1kMzg1MzUzMGEyODYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9kMDE2YWViZC0xZjk2LTRkZDEtYTIyYi1lZWIwMjAxZmI2MWUvIiwiaWF0IjoxNzg0MDA2MDYyLCJuYmYiOjE3ODQwMDYwNjIsImV4cCI6MTc4NDAwOTk2MiwiYWlvIjoiazJGZ1lQQlJiaEhhL3VHVnRXYitwSzE4b3BiTjNSZG1ubUQ5OG5TTlFjb3lsdWRzUXJvQSIsImFwcGlkIjoiMjI3ZmEzNDAtNGYyMi00NTIyLWI4MWMtZDM4NTM1MzBhMjg2IiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvZDAxNmFlYmQtMWY5Ni00ZGQxLWEyMmItZWViMDIwMWZiNjFlLyIsIm9pZCI6IjllNzQxYTZkLTNlMWUtNDhjYi04MWU3LWM1MGZlYWUxMzg0OSIsInJoIjoiMS5BVDRBdmE0VzBKWWYwVTJpSy02d0lCLTJIa0NqZnlJaVR5SkZ1QnpUaFRVd29vWUFBQUEtQUEuIiwic3ViIjoiOWU3NDFhNmQtM2UxZS00OGNiLTgxZTctYzUwZmVhZTEzODQ5IiwidGlkIjoiZDAxNmFlYmQtMWY5Ni00ZGQxLWEyMmItZWViMDIwMWZiNjFlIiwidXRpIjoiZVNGcHJqazhmVWFJN1BKbVZ4Y09BQSIsInZlciI6IjEuMCIsInhtc19mdGQiOiI2bnhWemM4N0s5TXpESFRHR1ZZUUgyTDFqT2RWVnRLWHloVWY4OEwtNmxVQmEyOXlaV0Z6YjNWMGFDMWtjMjF6In0.XZBkXQN5a3W3KtDf_Hir1nU2xY4OB9QXLorr-HcsphTO9KCLnL7PBq7SSZVSmQB3cl-gRd0ux6imZo68kCrVPzVbZ9rerZpSJ-5zVWix3HQFtVk1yx8zZAGdxMIdt0P4sNLR0PrtmpdqiHIggupFmd6inMiDKU_OK1oyAzimlB57LNbNjIXfHwDal5vhgHGTAeFZbPs33qtHipWKGFq6eXYodOILsRshFSXywCOYVMX_7Am8ZD4x1J0FpI1xwu8vjXNohbv82L6pGXUI9j9D0VF3sA5RFWkaCBqI2PK4K4DKoBdXS77FS2mEah_ZqOZnLJKQagr6sTPSWuh_EJVJZw",
+  "User-Agent": "axios/1.18.1",
+  "Accept-Encoding": "gzip, compress, deflate, br"
+}
+AxiosError: Request failed with status code 501
+    at settle (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:2216:12)
+    at IncomingMessage.handleStreamEnd (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:4062:11)
+    at IncomingMessage.emit (node:events:520:35)
+    at endReadableNT (node:internal/streams/readable:1701:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)
+    at Axios.request (C:\Users\Lenovo\Desktop\ZexpenseClaim\node_modules\axios\dist\node\axios.cjs:5517:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async C:\Users\Lenovo\Desktop\ZexpenseClaim\server.js:364:25
