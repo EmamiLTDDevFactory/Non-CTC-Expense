@@ -75,7 +75,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const restoreSession = async () => {
       try {
-        const savedSession = await AsyncStorage.getItem('user_session');
+        let savedSession: string | null = null;
+        if (typeof window !== 'undefined' && window.sessionStorage) {
+          await AsyncStorage.removeItem('user_session').catch(() => {});
+          savedSession = window.sessionStorage.getItem('user_session');
+        } else {
+          savedSession = await AsyncStorage.getItem('user_session');
+        }
+
         if (!savedSession) return;
 
         const parsedSession = JSON.parse(savedSession);
@@ -84,6 +91,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const name = parsedSession?.name;
 
         if (!role || !employeeId || !PROFILES[role]) {
+          if (typeof window !== 'undefined' && window.sessionStorage) {
+            window.sessionStorage.removeItem('user_session');
+          }
           await AsyncStorage.removeItem('user_session');
           return;
         }
@@ -104,6 +114,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setActiveRole(role);
       } catch (error) {
         console.error('Failed to restore user session:', error);
+        if (typeof window !== 'undefined' && window.sessionStorage) {
+          window.sessionStorage.removeItem('user_session');
+        }
         await AsyncStorage.removeItem('user_session').catch(console.error);
       } finally {
         setIsInitializing(false);
@@ -139,14 +152,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         console.warn('Failed to map extra profile fields', e);
       }
 
-      // Save session securely (include extra info for restore)
-      AsyncStorage.setItem('user_session', JSON.stringify({ role, employeeId, name, info })).catch(console.error);
+      // Save session securely to sessionStorage on web (and AsyncStorage as fallback)
+      const sessionData = JSON.stringify({ role, employeeId, name, info });
+      if (typeof window !== 'undefined' && window.sessionStorage) {
+        window.sessionStorage.setItem('user_session', sessionData);
+      } else {
+        AsyncStorage.setItem('user_session', sessionData).catch(console.error);
+      }
     }
     return true;
   };
 
   const logout = () => {
     setActiveRole(null);
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      window.sessionStorage.removeItem('user_session');
+    }
     AsyncStorage.removeItem('user_session').catch(console.error);
   };
 

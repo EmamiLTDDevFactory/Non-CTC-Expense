@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: non-ctc-expense
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run serve
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SAP_BASE_URL
+        sync: false
+      - key: AZURE_OAUTH_TOKEN_URL
+        sync: false
+      - key: AZURE_CLIENT_ID
+        sync: false
+      - key: AZURE_CLIENT_SECRET
+        sync: false
+      - key: AZURE_SCOPE
+        sync: false
