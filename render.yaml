@@ -3,7 +3,7 @@ services:
     name: non-ctc-expense
     env: node
     plan: free
-    buildCommand: npm install --include=dev && npm run build
+    buildCommand: npm install --legacy-peer-deps && npm run build
     startCommand: npm run serve
     envVars:
       - key: NODE_ENV
