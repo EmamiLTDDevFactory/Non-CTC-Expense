@@ -108,7 +108,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (info) {
           if (info.Department) PROFILES[role].department = info.Department;
           if (info.Designation) PROFILES[role].designation = info.Designation;
-          (PROFILES[role] as any).costCenter = info.CostCenter || info.costCenter || info.Costcenter;
+          const rawCc = info.CostCenter || info.costCenter || info.Costcenter || (PROFILES[role] as any).costCenter || '';
+          const ltext = info.Ltext || info.ltext || info.LTEXT || info.LText || '';
+          const formattedCc = (rawCc && ltext && !String(rawCc).includes('(')) ? `${rawCc} (${ltext})` : rawCc;
+          (PROFILES[role] as any).costCenter = formattedCc;
+          (PROFILES[role] as any).CostCenter = formattedCc;
           (PROFILES[role] as any).gst = info.GstSet || info.Gst || info.gst || (PROFILES[role] as any).gst;
         }
         setActiveRole(role);
@@ -144,8 +148,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           if (info.Designation) PROFILES[role].designation = info.Designation;
           if (info.employeeName) PROFILES[role].employeeName = info.employeeName;
           if (info.Name) PROFILES[role].employeeName = info.Name;
-          // store cost center as a non-typed property for Create page to read
-          (PROFILES[role] as any).costCenter = info.CostCenter || info.costCenter || info.Costcenter || (PROFILES[role] as any).costCenter;
+          // store cost center formatted with Ltext in brackets if available
+          const rawCc = info.CostCenter || info.costCenter || info.Costcenter || (PROFILES[role] as any).costCenter || '';
+          const ltext = info.Ltext || info.ltext || info.LTEXT || info.LText || '';
+          const formattedCc = (rawCc && ltext && !String(rawCc).includes('(')) ? `${rawCc} (${ltext})` : rawCc;
+          (PROFILES[role] as any).costCenter = formattedCc;
+          (PROFILES[role] as any).CostCenter = formattedCc;
           (PROFILES[role] as any).gst = info.GstSet || info.Gst || info.gst || (PROFILES[role] as any).gst;
         }
       } catch (e) {

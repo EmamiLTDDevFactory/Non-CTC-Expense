@@ -375,7 +375,7 @@ export const ClaimProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         Designation: claimData.designation || 'Staff',
         TotalAmount: claimData.amount.toFixed(3),
         Currency: 'INR',
-        CostCenter: claimData.costCenter,
+        CostCenter: (claimData.costCenter || '').split(' ')[0].trim(),
         Status: isDraft ? 'D' : 'N',
         CLAIMNAV: claimNavItems
     };
