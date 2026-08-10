@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "zexpense_claim",
-    "slug": "zexpense_claim",
+    "name": "Non-CTC Expense Management",
+    "slug": "non-ctc-expense",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
