@@ -77,6 +77,17 @@ const ALLOWED_ATTACHMENT_MIME_TYPES = new Set([
 
 const ALLOWED_ATTACHMENT_EXTENSIONS = new Set(['pdf', 'png', 'jpg', 'jpeg', 'xls', 'xlsx', 'csv', 'txt']);
 
+const parseCostCenter = (ccStr?: string) => {
+  if (!ccStr) return { costCenter: '', ltext: '' };
+  const match = ccStr.match(/^([^\(]+)(?:\((.*)\))?$/);
+  if (match) {
+    const costCenter = (match[1] || '').trim();
+    const ltext = (match[2] || '').trim();
+    return { costCenter, ltext };
+  }
+  return { costCenter: ccStr.trim(), ltext: '' };
+};
+
 const ClaimContext = createContext<ClaimContextType | undefined>(undefined);
 
 export const ClaimProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -367,6 +378,8 @@ export const ClaimProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       });
     }
 
+    const { costCenter: ccCode, ltext: ccLtext } = parseCostCenter(claimData.costCenter);
+
     const sapPayload = {
         ClaimId: existingClaimId ? existingClaimId : '', // Create-time empty, resubmit uses existing claim ID
         EmpId: empIdNumeric,
@@ -375,7 +388,8 @@ export const ClaimProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         Designation: claimData.designation || 'Staff',
         TotalAmount: claimData.amount.toFixed(3),
         Currency: 'INR',
-        CostCenter: (claimData.costCenter || '').split(' ')[0].trim(),
+        CostCenter: ccCode || claimData.costCenter,
+        Ltext: ccLtext,
         Status: isDraft ? 'D' : 'N',
         CLAIMNAV: claimNavItems
     };
