@@ -3,7 +3,7 @@
  */
 
 // Active backend URL fallback for AWS Amplify deployment
-const FALLBACK_BACKEND_URL = "https://dry-ghosts-taste.loca.lt";
+const FALLBACK_BACKEND_URL = "https://emami-expense-api.loca.lt";
 
 const getBaseUrl = (): string => {
   // 1. Environment variable override (highest priority)
