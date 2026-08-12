@@ -37,13 +37,26 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Temporary request logger to help debug 404s for /api/verify-otp
+// Standard Request Logging Middleware & Lambda Body Normalizer (Buffer + Base64 + Raw String + JSON)
 app.use((req, res, next) => {
-    try {
-        console.log('[INCOMING] ', req.method, req.path, 'body=', JSON.stringify(req.body || {}));
-    } catch (e) {
-        console.log('[INCOMING] ', req.method, req.path);
+    let bodyData = req.body || {};
+
+    if (Buffer.isBuffer(bodyData)) {
+        try { bodyData = JSON.parse(bodyData.toString('utf-8')); } catch (e) {}
+    } else if (bodyData && typeof bodyData === 'object' && bodyData.type === 'Buffer' && Array.isArray(bodyData.data)) {
+        try { bodyData = JSON.parse(Buffer.from(bodyData.data).toString('utf-8')); } catch (e) {}
+    } else if (typeof bodyData === 'string' && bodyData.trim()) {
+        let rawStr = bodyData.trim();
+        if (!rawStr.startsWith('{') && !rawStr.startsWith('[')) {
+            try { rawStr = Buffer.from(rawStr, 'base64').toString('utf-8'); } catch (e) {}
+        }
+        try { bodyData = JSON.parse(rawStr); } catch (e) {}
     }
+
+    req.body = bodyData;
+    try {
+        console.log('[INCOMING REQUEST] ', req.method, req.path, 'url=', req.url, 'bodyKeys=', Object.keys(req.body || {}));
+    } catch (e) {}
     next();
 });
 
@@ -232,7 +245,7 @@ const detectUserRole = async (loginId) => {
 // --- Routes ---
 
 // Example GET Route
-app.get('/api/get-data', async (req, res) => {
+app.get(['/get-data', '/api/get-data'], async (req, res) => {
     try {
         // Clear any stale session cookies from verify-otp to prevent SAP session collision
         jar.removeAllCookiesSync();
@@ -253,7 +266,7 @@ app.get('/api/get-data', async (req, res) => {
     }
 });
 
-app.get('/api/history-set', async (req, res) => {
+app.get(['/history-set', '/api/history-set'], async (req, res) => {
     try {
         jar.removeAllCookiesSync();
 
@@ -278,7 +291,7 @@ app.get('/api/history-set', async (req, res) => {
     }
 });
 
-app.get('/api/get-expense-types', async (req, res) => {
+app.get(['/get-expense-types', '/api/get-expense-types'], async (req, res) => {
     try {
         // Clear any stale session cookies to prevent SAP session collision
         jar.removeAllCookiesSync();
@@ -303,7 +316,7 @@ app.get('/api/get-expense-types', async (req, res) => {
 });
 
 // Fetch GST master data (GstSet) for the logged-in user if available
-app.get('/api/get-gst', async (req, res) => {
+app.get(['/get-gst', '/api/get-gst'], async (req, res) => {
     try {
         jar.removeAllCookiesSync();
         const gstin = (req.query.gstin || '').toString().replace(/\s+/g, '').toUpperCase();
@@ -317,7 +330,7 @@ app.get('/api/get-gst', async (req, res) => {
     }
 });
 
-app.get('/api/claim-header/:id', async (req, res) => {
+app.get(['/claim-header/:id', '/api/claim-header/:id'], async (req, res) => {
     try {
         const claimId = req.params.id;
         const expand = req.query.expand || 'CLAIMNAV,HISTORYNAV';
@@ -336,10 +349,13 @@ app.get('/api/claim-header/:id', async (req, res) => {
 });
 
 // Call SAP LoginSet to generate/send OTP using GET_ENTITY
-app.get('/api/send-otp', async (req, res) => {
+app.get(['/', '/send-otp', '/api/send-otp'], async (req, res) => {
     try {
         // Now getting loginId from frontend
         const rawLoginId = (req.query.loginId || req.query.empId || '').toString();
+        if (!rawLoginId && req.path === '/') {
+            return res.json({ status: 'API is live', message: 'Non-CTC Expense Backend running on AWS Lambda' });
+        }
         const sanitizedLoginId = rawLoginId.replace(/\D/g, '');
         if (!sanitizedLoginId || sanitizedLoginId.length > 8) {
             return res.status(400).json({ error: 'Invalid Employee ID' });
@@ -384,9 +400,17 @@ app.get('/api/send-otp', async (req, res) => {
 });
 
 // Call SAP LoginSet to Verify OTP (Using POST)
-app.post('/api/verify-otp', async (req, res) => {
+app.post(['/', '/verify-otp', '/api/verify-otp'], async (req, res) => {
     try {
-        const { loginId, otp, email } = req.body;
+        let bodyData = req.body || {};
+        if (typeof bodyData === 'string') {
+            try { bodyData = JSON.parse(bodyData); } catch (e) {}
+        }
+
+        const loginId = bodyData.loginId || bodyData.LoginId || bodyData.empId || req.query.loginId;
+        const otp = bodyData.otp || bodyData.Otp || req.query.otp;
+        const email = bodyData.email || bodyData.Email || "";
+
         if (!loginId || !otp) {
             return res.status(400).json({ error: 'loginId and otp are required' });
         }
@@ -457,7 +481,7 @@ app.post('/api/verify-otp', async (req, res) => {
 });
 
 // Example POST Route (Now accepting multipart/form-data)
-app.post('/api/submit', upload.any(), async (req, res) => {
+app.post(['/submit', '/api/submit'], upload.any(), async (req, res) => {
     console.log('\n=== [SUBMIT] NEW CLAIM SUBMISSION RECEIVED ===\n');
     try {
         jar.removeAllCookiesSync();
@@ -577,7 +601,7 @@ app.use((err, req, res, next) => {
 });
 
 // --- Approve or Reject Claim via PUT ---
-app.put('/api/approve-claim/:id', async (req, res) => {
+app.put(['/approve-claim/:id', '/api/approve-claim/:id'], async (req, res) => {
     try {
         const claimId = req.params.id;
         const { putData } = req.body;
@@ -617,6 +641,7 @@ app.put('/api/approve-claim/:id', async (req, res) => {
 
 // --- Serve Static Files & SPA Routing Fallback ---
 // Serve static frontend files from Expo build 'dist' directory
+const fs = require('fs');
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Fallback middleware for Single Page Application (SPA) routing (Express 5 / Node 24 safe)
@@ -624,10 +649,20 @@ app.use((req, res, next) => {
     if (req.path.startsWith('/api/')) {
         return next();
     }
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    const distIndexPath = path.join(__dirname, 'dist', 'index.html');
+    if (fs.existsSync(distIndexPath)) {
+        res.sendFile(distIndexPath);
+    } else {
+        next();
+    }
 });
 
 // --- Start Server ---
-app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-});
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Server listening on port ${port}`);
+    });
+}
+
+module.exports = app;
+

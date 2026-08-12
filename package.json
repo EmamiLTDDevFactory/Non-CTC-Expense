@@ -7,6 +7,7 @@
     "@expo/vector-icons": "~14.0.4",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/datetimepicker": "8.2.0",
+    "@types/react": "~18.3.12",
     "axios": "^1.18.1",
     "axios-cookiejar-support": "^5.0.5",
     "babel-plugin-react-compiler": "^1.0.0",
@@ -39,8 +40,8 @@
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
     "react-native-worklets": "0.8.3",
+    "serverless-http": "^4.0.0",
     "tough-cookie": "^6.0.1",
-    "@types/react": "~18.3.12",
     "typescript": "~6.0.3"
   },
   "scripts": {

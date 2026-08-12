@@ -100,7 +100,7 @@ export default function LoginScreen() {
 
     try {
       const empIdForSAP = trimmedId.replace(/\D/g, '').padStart(8, '0');
-      const response = await fetch(`${API_BASE_URL}/api/verify-otp`, {
+      const response = await fetch(`${API_BASE_URL}/api/verify-otp?loginId=${empIdForSAP}&otp=${encodeURIComponent(otp)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ loginId: empIdForSAP, otp, email })
