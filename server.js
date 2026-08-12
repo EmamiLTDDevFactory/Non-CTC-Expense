@@ -489,8 +489,16 @@ app.post(['/submit', '/api/submit'], upload.any(), async (req, res) => {
         // 2. Parse the JSON data sent from the mobile app
         let postData;
         try {
-            // Expo app should send 'claimData' as a stringified JSON field
-            postData = JSON.parse(req.body.claimData);
+            // Expo app sends 'claimData' as a stringified JSON field or object
+            if (typeof req.body?.claimData === 'string') {
+                postData = JSON.parse(req.body.claimData);
+            } else if (req.body?.claimData && typeof req.body.claimData === 'object') {
+                postData = req.body.claimData;
+            } else if (typeof req.body === 'string') {
+                postData = JSON.parse(req.body);
+            } else {
+                postData = req.body;
+            }
         } catch (e) {
             return res.status(400).json({ error: 'Missing or invalid claimData JSON in form body' });
         }
