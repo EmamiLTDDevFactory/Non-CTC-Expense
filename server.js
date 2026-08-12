@@ -349,7 +349,7 @@ app.get(['/claim-header/:id', '/api/claim-header/:id'], async (req, res) => {
 });
 
 // Call SAP LoginSet to generate/send OTP using GET_ENTITY
-app.get(['/send-otp', '/api/send-otp'], async (req, res) => {
+app.get(['/', '/send-otp', '/api/send-otp'], async (req, res) => {
     try {
         // Now getting loginId from frontend
         const rawLoginId = (req.query.loginId || req.query.empId || '').toString();
