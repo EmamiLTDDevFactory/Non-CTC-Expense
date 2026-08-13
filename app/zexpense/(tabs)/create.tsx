@@ -32,6 +32,11 @@ const ALLOWED_ATTACHMENT_MIME_TYPES = new Set([
 const ALLOWED_ATTACHMENT_EXTENSIONS = new Set(['pdf', 'png', 'jpg', 'jpeg', 'xls', 'xlsx', 'csv', 'txt']);
 const ALLOWED_ATTACHMENT_LABEL = 'PDF, PNG, JPG, JPEG, XLS, XLSX, CSV, TXT';
 
+// Attachments travel to the backend as base64 (adds ~33% size), and the Lambda Function URL
+// hard-caps the whole request at 6 MB — 4.5 MB of real file content stays safely under that.
+const MAX_ATTACHMENTS_TOTAL_BYTES = 4 * 1024 * 1024;
+const MAX_ATTACHMENTS_TOTAL_LABEL = '4 MB';
+
 export default function CreateClaimScreen() {
   const router = useRouter();
   const { currentUser } = useAuth();
@@ -384,6 +389,13 @@ export default function CreateClaimScreen() {
             return;
           }
 
+          const existingTotal = attachments.reduce((sum, a) => sum + (a.size || 0), 0);
+          const newFileSize = asset.size || 0;
+          if (existingTotal + newFileSize > MAX_ATTACHMENTS_TOTAL_BYTES) {
+            setFormError(`Total attachment size cannot exceed ${MAX_ATTACHMENTS_TOTAL_LABEL}. Please attach a smaller file or remove an existing one.`);
+            return;
+          }
+
           const newAtt: Attachment = {
             id: `att-${Date.now()}`,
             name: asset.name || 'document',
@@ -703,6 +715,7 @@ export default function CreateClaimScreen() {
           <Text style={styles.sectionHeading}>Supporting Documents *</Text>
           <Text style={styles.subtext}>At least 1 attachment is mandatory</Text>
           <Text style={styles.subtext}>Allowed: {ALLOWED_ATTACHMENT_LABEL}</Text>
+          <Text style={styles.subtext}>Total size limit: {MAX_ATTACHMENTS_TOTAL_LABEL}</Text>
         </View>
 
         {attachments.map(att => (
