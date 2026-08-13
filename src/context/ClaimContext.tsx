@@ -77,6 +77,22 @@ const ALLOWED_ATTACHMENT_MIME_TYPES = new Set([
 
 const ALLOWED_ATTACHMENT_EXTENSIONS = new Set(['pdf', 'png', 'jpg', 'jpeg', 'xls', 'xlsx', 'csv', 'txt']);
 
+// Reads a picked attachment (blob: or file: uri) into a plain base64 string, so it can travel
+// as JSON text instead of a raw binary multipart upload.
+const readAttachmentAsBase64 = (uri: string): Promise<string> => {
+  return fetch(uri)
+    .then(res => res.blob())
+    .then(blob => new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = (reader.result as string) || '';
+        resolve(result.includes(',') ? result.split(',')[1] : result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    }));
+};
+
 const parseCostCenter = (ccStr?: string) => {
   if (!ccStr) return { costCenter: '', ltext: '' };
   const match = ccStr.match(/^([^\(]+)(?:\((.*)\))?$/);
@@ -395,34 +411,30 @@ export const ClaimProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
 
     // 3. Send request to Node.js Backend
+    // Attachments travel as base64 inside the JSON body rather than a raw multipart upload —
+    // binary multipart data was getting corrupted in transit through the Lambda Function URL.
     try {
-        const formData = new FormData();
-        formData.append('claimData', JSON.stringify(sapPayload));
-
-        // Attach documents (handling Web browser Blob requirements)
+        const attachmentsPayload = [];
         if (claimData.attachments && claimData.attachments.length > 0) {
             for (let i = 0; i < claimData.attachments.length; i++) {
                 const att = claimData.attachments[i];
-                try {
-                    // This works perfectly on Web (Chrome) to get a real File Blob
-                    const fileRes = await fetch(att.uri);
-                    const blob = await fileRes.blob();
-                    formData.append(`receipt_${i}`, blob, att.name);
-                } catch (e) {
-                    // Fallback for native iOS/Android
-                    formData.append(`receipt_${i}`, {
-                        uri: att.uri,
-                        name: att.name,
-                        type: att.type || 'application/octet-stream'
-                    } as any);
-                }
+                const base64 = await readAttachmentAsBase64(att.uri);
+                attachmentsPayload.push({
+                    fieldName: `receipt_${i}`,
+                    name: att.name,
+                    type: att.type || 'application/octet-stream',
+                    base64,
+                });
             }
         }
 
         const response = await fetch(`${API_BASE_URL}/api/submit`, {
             method: 'POST',
-            body: formData,
-            // fetch automatically sets correct multipart/form-data boundary headers
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                claimData: sapPayload,
+                attachments: attachmentsPayload,
+            }),
         });
 
         let responseData: any = null;
